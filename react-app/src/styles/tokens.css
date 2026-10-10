@@ -2,7 +2,7 @@
 :root {
   --ink: #1d1a2e;
   --ink-2: #4a4560;
-  --text-muted: #726c88;
+  --text-muted: #5f5975;
   --bg: #f5f4f9;
   --card: #ffffff;
   --border: #e2dfee;
@@ -27,5 +27,5 @@
   --code-number: #e3b567;
   --radius: 10px;
   --shadow: 0 1px 3px rgba(24, 18, 48, 0.08), 0 4px 14px rgba(24, 18, 48, 0.06);
-  --sidebar-w: 300px;
+  --sidebar-w: 320px;
 }

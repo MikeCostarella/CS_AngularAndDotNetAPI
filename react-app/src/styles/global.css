@@ -1,18 +1,23 @@
 * { box-sizing: border-box; }
 
-html { scroll-behavior: smooth; }
+/* Base text size: every rem on the site scales from this (18px instead of the browser's 16px), so the whole
+   site reads larger without changing any one rule. */
+html { scroll-behavior: smooth; font-size: 112.5%; }
 
 body {
   margin: 0;
   background: var(--bg);
   color: var(--ink);
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-  line-height: 1.55;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
 }
 
 .app { min-height: 100vh; display: flex; flex-direction: column; }
 
-/* ---------------------------------------------------------------- masthead */
+/* ---------------------------------------------------------------- masthead
+   Sized to stay the same on screen after the larger base text size, so the top bar doesn't crowd. */
 .masthead {
   background: var(--brand);
   color: var(--brand-ink);
@@ -25,11 +30,11 @@ body {
   z-index: 50;
 }
 .brand { color: inherit; text-decoration: none; flex: 1; min-width: 0; }
-.masthead h1 { font-size: 1.12rem; margin: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.masthead .sub { font-size: 0.78rem; opacity: 0.75; }
-.top-links { display: flex; gap: 16px; font-size: 0.9rem; }
+.masthead h1 { font-size: 1rem; margin: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.masthead .sub { font-size: 0.7rem; opacity: 0.75; }
+.top-links { display: flex; gap: 16px; font-size: 0.8rem; }
 .masthead .build-stamp {
-  font-size: 0.72rem; color: var(--brand-ink); opacity: 0.6;
+  font-size: 0.64rem; color: var(--brand-ink); opacity: 0.6;
   white-space: nowrap; margin-left: 4px;
 }
 .top-links a { color: var(--brand-ink); text-decoration: none; opacity: 0.85; padding: 4px 2px; }
@@ -97,7 +102,7 @@ body {
 .nav-mod.on { border-left-color: var(--accent); background: var(--tint); color: var(--ink); font-weight: 600; }
 .nm-no { display: inline-block; min-width: 1.4em; color: var(--text-muted); font-variant-numeric: tabular-nums; }
 
-.content { flex: 1; min-width: 0; padding: 30px clamp(18px, 4vw, 56px) 70px; max-width: 980px; }
+.content { flex: 1; min-width: 0; padding: 30px clamp(18px, 4vw, 56px) 70px; max-width: 62rem; }
 
 /* -------------------------------------------------------------------- home */
 .kicker { text-transform: uppercase; letter-spacing: 0.08em; font-size: 0.78rem; color: var(--accent-dark); font-weight: 700; margin: 4px 0 6px; }
@@ -457,7 +462,7 @@ h2 { font-size: 1.18rem; margin: 0 0 10px; }
   color: var(--brand-ink); opacity: 0.6; pointer-events: none;
 }
 .sb-input {
-  width: 100%; font: inherit; font-size: 0.86rem;
+  width: 100%; font: inherit; font-size: 0.78rem;
   padding: 7px 32px 7px 30px;
   color: var(--brand-ink); background: rgba(255, 255, 255, 0.12);
   border: 1px solid rgba(255, 255, 255, 0.22); border-radius: 999px;
