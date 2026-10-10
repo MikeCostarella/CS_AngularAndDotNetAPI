@@ -14,7 +14,7 @@ export const M01_NOTES: LectureNotesDef = {
       topic: "client-server",
       blocks: [
         "Open WeShopAlot's shop page and two programs are working. The {{client|client}} is the Angular app running inside your browser: it draws the product grid, reacts to clicks, and remembers what is in your basket. The {{server|server}} is the ASP.NET Core Web API running somewhere else: it owns the product database, checks passwords, totals orders, and talks to Stripe. The two never share memory, variables, or code. All they can do is send each other HTTP messages.",
-        "That separation is the point. It lets each half be written in the language that suits it (TypeScript in the browser, C# on the server), deployed on its own schedule, and replaced without touching the other. WeShopAlot proves it: the same API serves an Angular client, an ASP.NET MVC client, and a WPF desktop client.",
+        "That separation is the point. It lets each half be written in the language that suits it (TypeScript in the browser, C# on the server), deployed on its own schedule, and replaced without touching the other. WeShopAlot proves it: the same API serves an Angular web client and a WPF desktop client, each with the full shop: catalog, basket, sign-in, checkout and orders.",
         {
           table: {
             head: ["Concern", "Client (Angular)", "Server (Web API)"],
@@ -44,7 +44,7 @@ export const M01_NOTES: LectureNotesDef = {
           a: "No. The client can be changed by anyone. The API should look up each product's price itself and compute the total on the server, which is what WeShopAlot's OrderService does.",
         },
         {
-          q: "Name two benefits WeShopAlot gets from having three different clients (Angular, MVC, WPF) on one API.",
+          q: "Name two benefits WeShopAlot gets from having two very different clients (Angular in the browser, WPF on the desktop) on one API.",
           a: "The business rules live in one place, so every client behaves the same; and a client can be rewritten or added without changing the server. It also proves the API doesn't depend on any one client.",
         },
       ],
@@ -352,7 +352,7 @@ export const M01_NOTES: LectureNotesDef = {
               ["`WeShopAlot.Infrastructure.Services`", "Orders, Stripe payments, JWT tokens, Redis cache", "Modules 10, 11"],
               ["`WeShopAlot.Shared`", "DTOs and a typed .NET API client", "Module 3"],
               ["`Client`", "The Angular client (written for Angular 15)", "Modules 7–9"],
-              ["`WeShopAlot.UI.ClientMVC`, `…ClientWPF`", "Two more clients of the same API", "This module"],
+              ["`WeShopAlot.UI.ClientWPF`", "A desktop client of the same API", "This module"],
               ["`WeShopAlot.Testing.*`", "Repository, service, and controller tests", "Module 12"],
               ["`Deployment`, `docker-compose.yml`, `Confluence`", "ARM templates, Redis, Azure walkthrough screenshots", "Module 13"],
             ],
@@ -376,8 +376,8 @@ export const M01_NOTES: LectureNotesDef = {
           a: "`WeShopAlot.Data`, in its Specifications folder (ProductSpecParams and the product specifications), reached from ProductController in `WeShopAlot.WebAPI`.",
         },
         {
-          q: "Why does it matter that WeShopAlot has three clients for a lesson on API design?",
-          a: "Any change to an endpoint's shape has to work for all three, which makes the cost of a breaking change concrete and shows why the contract is designed first.",
+          q: "Why does it matter that WeShopAlot has more than one client for a lesson on API design?",
+          a: "Any change to an endpoint's shape has to work for both the Angular and the WPF client, which makes the cost of a breaking change concrete and shows why the contract is designed first.",
         },
       ],
       readings: ["weshopalot-repo"],
