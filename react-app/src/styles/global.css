@@ -1,8 +1,8 @@
 * { box-sizing: border-box; }
 
-/* Base text size: every rem on the site scales from this (18px instead of the browser's 16px), so the whole
+/* Base text size: every rem on the site scales from this (19px instead of the browser's 16px), so the whole
    site reads larger without changing any one rule. */
-html { scroll-behavior: smooth; font-size: 112.5%; }
+html { scroll-behavior: smooth; font-size: 118.75%; }
 
 body {
   margin: 0;
@@ -30,11 +30,11 @@ body {
   z-index: 50;
 }
 .brand { color: inherit; text-decoration: none; flex: 1; min-width: 0; }
-.masthead h1 { font-size: 1rem; margin: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.masthead .sub { font-size: 0.7rem; opacity: 0.75; }
-.top-links { display: flex; gap: 16px; font-size: 0.8rem; }
+.masthead h1 { font-size: 0.94rem; margin: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.masthead .sub { font-size: 0.66rem; opacity: 0.75; }
+.top-links { display: flex; gap: 16px; font-size: 0.76rem; }
 .masthead .build-stamp {
-  font-size: 0.64rem; color: var(--brand-ink); opacity: 0.6;
+  font-size: 0.61rem; color: var(--brand-ink); opacity: 0.6;
   white-space: nowrap; margin-left: 4px;
 }
 .top-links a { color: var(--brand-ink); text-decoration: none; opacity: 0.85; padding: 4px 2px; }
@@ -159,6 +159,8 @@ h2 { font-size: 1.18rem; margin: 0 0 10px; }
 }
 .oc-toggle:hover, .oc-toggle[aria-expanded="true"] { background: var(--tint); color: var(--accent-dark); }
 .oc-toggle[aria-expanded="true"] .stat-caret { transform: rotate(180deg); }
+/* On a phone the "Taught in Modules … references" link may wrap instead of running off the screen. */
+@media (max-width: 560px) { .oc-toggle { white-space: normal; text-align: left; } }
 .oc-panel {
   margin: 8px 0 12px; background: var(--card); border: 1px solid var(--tint-border);
   border-radius: var(--radius); padding: 8px 16px; box-shadow: var(--shadow);
@@ -462,7 +464,7 @@ h2 { font-size: 1.18rem; margin: 0 0 10px; }
   color: var(--brand-ink); opacity: 0.6; pointer-events: none;
 }
 .sb-input {
-  width: 100%; font: inherit; font-size: 0.78rem;
+  width: 100%; font: inherit; font-size: 0.72rem;
   padding: 7px 32px 7px 30px;
   color: var(--brand-ink); background: rgba(255, 255, 255, 0.12);
   border: 1px solid rgba(255, 255, 255, 0.22); border-radius: 999px;
