@@ -34,7 +34,7 @@ export const COURSE = {
     "Containerize, configure, and deploy the API and client to the cloud, and deliver a working, documented full-stack application as a team.",
   ],
   format:
-    "Thirteen modules in five units across a 15-week semester. Each module pairs lecture with a hands-on lab, and the labs build one application: ShelfShare starts in Lab 2 as an empty Web API and grows a database, query features, error handling, an Angular client, sign-in, caching, a payment integration, tests, and a cloud deployment. Every module also has a WeShopAlot reading: the same idea in a larger, finished system, including the places where that system gets it wrong. Week 8 is a midterm checkpoint; weeks 14–15 are final team projects with demos.",
+    "Thirteen modules in five units across a 15-week semester. Each module pairs lecture with a hands-on lab, and the labs build one application: ShelfShare starts in Lab 2 as an empty Web API and grows a database, query features, error handling, an Angular client, sign-in, caching, a payment integration, tests, and a cloud deployment. Every module also has a WeShopAlot reading: the same idea in a larger, finished system, including the places where that system gets it wrong. WeShopAlot has two clients on one API, an Angular web app and a WPF desktop app with the same features and the same design, so students can compare a browser client and a desktop client calling the same endpoints. Week 8 is a midterm checkpoint; weeks 14–15 are final team projects with demos.",
   grading: [
     { component: "Labs (ShelfShare, Labs 1–13)", weight: "35%" },
     { component: "Midterm checkpoint (week 8)", weight: "15%" },
