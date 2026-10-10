@@ -55,6 +55,7 @@ export const REFERENCE_SECTIONS: PageSection[] = [
       "`WeShopAlot.Data.ConsoleApp`: loads the JSON seed files (products, brands, types, delivery methods)",
       "`Client`: the Angular client (written for Angular 15) with shop, basket, checkout, account, and orders features",
       "`WeShopAlot.UI.ClientWPF`: a desktop client with the same features as the Angular app, the clearest proof that the API is the product",
+      "`DesignSystem`: one tokens.json file of brand colors, fonts, sizes, and spacing, and a small Node script that generates the Angular Sass variables and the WPF resource dictionary from it, so both clients share one look",
       "`WeShopAlot.Testing.*`: repository, service, and Web API test projects with shared base classes",
       "`Deployment`: ARM templates for App Service, Function App, Key Vault, and Storage; `docker-compose.yml` runs Redis",
       "`Confluence`: architecture and data-model diagrams, and step-by-step screenshots of creating each Azure resource",

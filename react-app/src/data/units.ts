@@ -427,6 +427,7 @@ export const UNIT_DEFS: UnitDef[] = [
         overview: [
           "Angular is a complete framework for single-page applications: components for the screen, a router for navigation, dependency injection for services, and a CLI that builds, serves, and tests the app. This module builds a working ShelfShare client with hard-coded data, so the framework is learned before the network is added.",
           "The course teaches current Angular: standalone components, built-in control flow (@if, @for), and signals for state. WeShopAlot's client was written for Angular 15 with NgModules and RxJS everywhere, so reading it alongside ShelfShare shows students what changed, and gives them the vocabulary to maintain the older style they will meet in real codebases.",
+          "WeShopAlot's two clients also share one design. A single tokens.json file holds the brand colors, fonts, sizes, and spacing, and a small Node script generates Sass variables for the Angular client and a XAML resource dictionary for the WPF client. The header, hamburger menu, page band, footer, and the shop's Cards and List views therefore look the same in a browser and on the desktop: the visual side of the course's argument that the API is the product and any client can present it.",
         ],
         topics: [
           { id: "angular-cli", text: "The Angular CLI and workspace: ng new, ng serve, ng build, and ng generate" },
@@ -436,6 +437,7 @@ export const UNIT_DEFS: UnitDef[] = [
           { id: "routing", text: "Routing: routes, route parameters, lazy loading, and component input binding" },
           { id: "angular-services", text: "Services and dependency injection in Angular: inject() and providedIn" },
           { id: "weshopalot-client", text: "Reading WeShopAlot's Angular 15 client: NgModules, feature folders, and what has changed since" },
+          { id: "design-tokens", text: "Design tokens: one file of colors, fonts, and sizes that styles both WeShopAlot clients" },
         ],
         resources: ["angular-docs", "angular-components", "angular-signals", "angular-routing", "angular-tutorial", "weshopalot-repo"],
         lab: {
