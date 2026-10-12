@@ -1,0 +1,100 @@
+/* Read aloud — shared across the course sites (keep the copies identical).
+   Colors come from each site's tokens, with fallbacks for sites whose
+   tokens use other names. */
+:root {
+  --ra-bar: var(--brand, var(--bg-raised, #1f1b3a));
+  --ra-bar-ink: var(--brand-ink, var(--text, #efecfb));
+  --ra-accent: var(--accent, #7c5cff);
+  --ra-accent-dark: var(--accent-dark, var(--accent, #5a3fd1));
+  --ra-tint: var(--tint, var(--accent-wash, color-mix(in srgb, var(--ra-accent) 14%, #fff)));
+  --ra-tint-border: var(--tint-border, var(--border, #d9d0fb));
+  --ra-hover: var(--soft, var(--hover, rgba(127, 127, 127, 0.08)));
+  --ra-menu-ink: var(--ink, #1d1a2e);
+  --ra-menu-bg: var(--card, #fff);
+}
+
+.listen-btn {
+  display: inline-flex; align-items: center; gap: 6px;
+  margin: 10px 0 4px; padding: 6px 12px;
+  font: inherit; font-size: 0.88rem; font-weight: 600;
+  color: var(--ra-accent-dark); background: var(--ra-tint);
+  border: 1px solid var(--ra-tint-border); border-radius: 999px; cursor: pointer;
+}
+.listen-btn:hover { filter: brightness(0.96); }
+.listen-btn:focus-visible, .ra-fab:focus-visible, .ra-btn:focus-visible { outline: 2px solid var(--ra-accent); outline-offset: 2px; }
+
+.ra-fab {
+  position: fixed; right: 20px; bottom: 20px; z-index: 90;
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 10px 16px; font: inherit; font-size: 0.92rem; font-weight: 600;
+  color: var(--ra-bar-ink); background: var(--ra-bar);
+  border: 1px solid rgba(255, 255, 255, 0.12); border-radius: 999px;
+  box-shadow: 0 4px 16px rgba(24, 18, 48, 0.25); cursor: pointer;
+}
+.ra-fab:hover { background: var(--ra-accent-dark); }
+
+.ra-bar {
+  position: fixed; right: 20px; bottom: 20px; z-index: 90;
+  width: min(560px, calc(100vw - 32px));
+  background: var(--ra-bar); color: var(--ra-bar-ink);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 14px; box-shadow: 0 6px 24px rgba(24, 18, 48, 0.28);
+  padding: 8px 10px;
+}
+.ra-row { display: flex; align-items: center; gap: 4px; }
+.ra-btn {
+  flex: none; width: 36px; height: 36px; display: grid; place-items: center;
+  font: inherit; font-size: 1rem; line-height: 1;
+  color: var(--ra-bar-ink); background: transparent; border: 0; border-radius: 8px; cursor: pointer;
+}
+.ra-btn:hover, .ra-btn.on { background: rgba(255, 255, 255, 0.12); }
+.ra-play { color: #fff; background: var(--ra-accent); width: 40px; height: 40px; border-radius: 50%; }
+.ra-play:hover { background: var(--ra-accent-dark); }
+.ra-status {
+  flex: 1; min-width: 0; padding: 0 8px; font-size: 0.85rem; opacity: 0.9;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.ra-rate, .ra-settings select {
+  font: inherit; font-size: 0.85rem; color: var(--ra-bar-ink);
+  background: rgba(255, 255, 255, 0.1); border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 6px; padding: 4px 6px;
+}
+.ra-rate option, .ra-settings option { color: var(--ra-menu-ink); background: var(--ra-menu-bg); }
+.ra-settings { border-top: 1px solid rgba(255, 255, 255, 0.15); margin-top: 8px; padding: 8px 4px 2px; }
+.ra-settings label { display: flex; align-items: center; gap: 8px; font-size: 0.85rem; }
+.ra-settings select { flex: 1; min-width: 0; }
+.ra-hint { margin: 8px 0 0; font-size: 0.78rem; opacity: 0.75; line-height: 1.4; }
+
+/* The paragraph being read, and the paragraphs you can click to jump to. */
+[data-tts-current] {
+  background: var(--ra-tint) !important;
+  box-shadow: 0 0 0 6px var(--ra-tint), -9px 0 0 0 var(--ra-accent);
+  border-radius: 4px;
+  transition: background 0.2s ease;
+}
+.tts-open [data-tts-block]:not([data-tts-current]):hover { background: var(--ra-hover); cursor: pointer; border-radius: 4px; }
+body.tts-open { padding-bottom: 84px; }
+
+/* "Read this page aloud" in the hamburger menu's View section: a button styled like its links. */
+.acc-body .acc-link-btn {
+  display: block; width: 100%; text-align: left; padding: 6px 20px;
+  font: inherit; font-size: 0.88rem; color: var(--ink-2, inherit);
+  background: transparent; border: 0; cursor: pointer;
+}
+.acc-body .acc-link-btn:hover { background: var(--ra-tint); color: var(--ink, inherit); }
+
+@media (max-width: 640px) {
+  .ra-fab { right: 16px; bottom: 16px; }
+  .ra-bar { right: 8px; left: 8px; bottom: 8px; width: auto; }
+  .ra-btn { width: 30px; }
+  .ra-play { width: 38px; height: 38px; }
+  .ra-status { padding: 0 4px; font-size: 0.8rem; }
+  .ra-word { display: none; }
+  .ra-rate { padding: 4px 2px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  [data-tts-current] { transition: none; }
+}
+@media print {
+  .ra-fab, .ra-bar, .listen-btn { display: none !important; }
+}

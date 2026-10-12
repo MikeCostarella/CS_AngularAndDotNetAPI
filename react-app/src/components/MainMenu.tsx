@@ -3,6 +3,7 @@ import { UNITS } from "../data/modules";
 import { COURSE } from "../data/course";
 import BuildStamp from "./BuildStamp";
 
+import { startReadAloud, ttsSupported } from "../lib/pageReader";
 // Fleet hamburger accordion menu: one section open at a time, internal
 // navigation plus external links, build stamp at the foot.
 
@@ -71,6 +72,18 @@ export default function MainMenu() {
                 <a href="#/tools">Tools &amp; Setup</a>
                 <a href="#/resources">Resources</a>
                 <a href="#/glossary">Glossary</a>
+                {ttsSupported && (
+                  <button
+                    type="button"
+                    className="acc-link-btn"
+                    onClick={() => {
+                      setOpen(false);
+                      startReadAloud("top");
+                    }}
+                  >
+                    🔊 Read this page aloud
+                  </button>
+                )}
               </div>
             )}
           </div>

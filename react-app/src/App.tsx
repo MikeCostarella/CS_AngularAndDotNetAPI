@@ -12,6 +12,7 @@ import SearchPage from "./components/SearchPage";
 import SearchBox from "./components/SearchBox";
 import BuildStamp from "./components/BuildStamp";
 import MainMenu from "./components/MainMenu";
+import ReadAloud from "./components/ReadAloud";
 import { MODULE_BY_ID, UNITS } from "./data/modules";
 import { COURSE } from "./data/course";
 
@@ -181,6 +182,8 @@ export default function App() {
         </span>
         <BuildStamp />
       </footer>
+
+      <ReadAloud />
     </div>
   );
 }

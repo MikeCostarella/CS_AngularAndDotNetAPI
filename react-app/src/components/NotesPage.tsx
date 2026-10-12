@@ -5,6 +5,7 @@ import type { ModuleDef, NoteBlock } from "../data/types";
 import CopyCode from "./CopyCode";
 import NoteText from "./NoteText";
 
+import { ListenButton } from "./ReadAloud";
 function Block({ b }: { b: NoteBlock }) {
   if (typeof b === "string") {
     return (
@@ -101,6 +102,7 @@ export default function NotesPage({ mod }: { mod: ModuleDef }) {
         {mod.title}
       </h1>
       <p className="mod-subtitle">{mod.subtitle}</p>
+      <ListenButton label="Listen to these notes" />
 
       {problems.length > 0 && (
         <div className="oc-problems" role="alert">

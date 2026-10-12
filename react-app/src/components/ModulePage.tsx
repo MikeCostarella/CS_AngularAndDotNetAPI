@@ -7,6 +7,7 @@ import CourseFolderBox from "./CourseFolderBox";
 import type { LabScriptStep } from "../data/types";
 import { joinFolder, labFolderName, useCourseFolder, vscodeUrl } from "../lib/courseFolder";
 
+import { ListenButton } from "./ReadAloud";
 /** Step labels that name VS Code ("VS Code", "VS Code + PowerShell"). */
 const isVsCode = (where?: string) => !!where && /VS Code/i.test(where);
 
@@ -73,6 +74,7 @@ export default function ModulePage({ mod }: { mod: ModuleDef }) {
         {mod.title}
       </h1>
       <p className="mod-subtitle">{mod.subtitle}</p>
+      <ListenButton />
 
       <section id="overview">
         {mod.overview.map((p, i) => (
