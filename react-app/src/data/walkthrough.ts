@@ -43,7 +43,7 @@ export interface WalkStep {
 }
 
 export const WALKTHROUGH_LEDE =
-  "WeShopAlot running on one machine: the ASP.NET Core API on https://localhost:7244 and the Angular client on http://localhost:4200. We look at the service first, on its own, and then walk one purchase through the UI, naming the HTTP calls behind every screen. Open the browser's Network tab while you follow along and you will see the same calls.";
+  "WeShopAlot running on one machine: the ASP.NET Core API on https://localhost:7244 and the Angular client on https://localhost:4200. We look at the service first, on its own, and then walk one purchase through the UI, naming the HTTP calls behind every screen. Open the browser's Network tab while you follow along and you will see the same calls.";
 
 export const WALKTHROUGH_STEPS: WalkStep[] = [
   {
@@ -73,7 +73,7 @@ export const WALKTHROUGH_STEPS: WalkStep[] = [
     layer: "UI",
     title: "Shop: a paged, filtered list",
     short: "Shop",
-    url: "http://localhost:4200/shop",
+    url: "https://localhost:4200/shop",
     image: "01-shop.webp",
     size: [1600, 840],
     alt: "WeShopAlot shop page with brand and type filters, sort, search, and six guitar cards, showing 1-6 of 16 results",
@@ -101,7 +101,7 @@ export const WALKTHROUGH_STEPS: WalkStep[] = [
     layer: "UI",
     title: "Basket: the whole basket, every time",
     short: "Basket",
-    url: "http://localhost:4200/basket",
+    url: "https://localhost:4200/basket",
     image: "02-basket.webp",
     size: [1600, 903],
     alt: "WeShopAlot basket page with one 12-String Cutaway at $800.00, quantity controls, and an order summary",
@@ -124,7 +124,7 @@ export const WALKTHROUGH_STEPS: WalkStep[] = [
     layer: "UI",
     title: "Checkout, step 1: Address (signed in)",
     short: "Address",
-    url: "http://localhost:4200/checkout",
+    url: "https://localhost:4200/checkout",
     image: "03-address.webp",
     size: [1600, 904],
     alt: "Checkout address step with the shipping address form pre-filled for the signed-in user",
@@ -148,7 +148,7 @@ export const WALKTHROUGH_STEPS: WalkStep[] = [
     layer: "UI",
     title: "Checkout, step 2: Delivery",
     short: "Delivery",
-    url: "http://localhost:4200/checkout",
+    url: "https://localhost:4200/checkout",
     image: "04-delivery.webp",
     size: [1600, 602],
     alt: "Checkout delivery step with four delivery methods, FREE selected",
@@ -170,7 +170,7 @@ export const WALKTHROUGH_STEPS: WalkStep[] = [
     layer: "UI",
     title: "Checkout, step 3: Review",
     short: "Review",
-    url: "http://localhost:4200/checkout",
+    url: "https://localhost:4200/checkout",
     image: "05-review.webp",
     size: [1600, 595],
     alt: "Checkout review step showing the basket contents before payment",
@@ -189,7 +189,7 @@ export const WALKTHROUGH_STEPS: WalkStep[] = [
     layer: "UI",
     title: "Checkout, step 4: Payment",
     short: "Payment",
-    url: "http://localhost:4200/checkout",
+    url: "https://localhost:4200/checkout",
     image: "06-payment.webp",
     size: [1600, 620],
     alt: "Checkout payment step with Stripe card fields filled in with the 4242 test card",
@@ -214,7 +214,7 @@ export const WALKTHROUGH_STEPS: WalkStep[] = [
     layer: "UI",
     title: "Success: the order is confirmed",
     short: "Success",
-    url: "http://localhost:4200/checkout/success",
+    url: "https://localhost:4200/checkout/success",
     image: "07-success.webp",
     size: [1600, 546],
     alt: "Order confirmation page with a green check and a View your order button",
