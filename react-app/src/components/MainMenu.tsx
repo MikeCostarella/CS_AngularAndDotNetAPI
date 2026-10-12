@@ -68,6 +68,7 @@ export default function MainMenu() {
                 <a href="#/search">Search the course</a>
                 <a href="#/syllabus">Syllabus &amp; weekly schedule</a>
                 <a href="#/reference">Reference app: WeShopAlot</a>
+                <a href="#/walkthrough">Service → UI walkthrough</a>
                 <a href="#/projects">Projects</a>
                 <a href="#/tools">Tools &amp; Setup</a>
                 <a href="#/resources">Resources</a>

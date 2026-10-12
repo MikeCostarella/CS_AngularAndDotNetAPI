@@ -144,6 +144,10 @@ export default function HomePage() {
           <span className="step">EF Core</span><span className="arrow">→</span>
           <span className="step">Database</span><span className="arrow">↺</span>
         </div>
+        <p>
+          <a className="contact-link" href="#/walkthrough">See it run: the Service → UI walkthrough →</a>{" "}
+          Swagger first, then one purchase in WeShopAlot, with the HTTP calls behind every screen.
+        </p>
       </section>
 
       <section id="outcomes">

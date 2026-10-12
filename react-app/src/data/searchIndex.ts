@@ -13,6 +13,7 @@ import { PROJECT_NOTES, PROJECT_REQUIREMENTS, PROJECTS } from "./projects";
 import { RESOURCES, resolveRefs } from "./resources";
 import { TOOLS, TOOLS_LEDE, TOOLS_SECTIONS } from "./tools";
 import { ENDPOINTS, REFERENCE_LEDE, REFERENCE_SECTIONS } from "./reference";
+import { WALKTHROUGH_LEDE, WALKTHROUGH_STEPS } from "./walkthrough";
 import type { LabTask, PageSection } from "./types";
 
 export type SearchKind =
@@ -329,6 +330,32 @@ function build(): SearchDoc[] {
     body: ENDPOINTS.map((e) => `${e.method} ${e.route}: ${e.does}. ${e.note}`).join(" "),
     href: "#/reference?s=endpoints",
   });
+
+  // ------------------------------------------------ Service → UI walkthrough
+  docs.push({
+    id: "walkthrough-overview",
+    kind: "page",
+    title: "Service → UI walkthrough",
+    subtitle: "Swagger first, then one purchase through the Angular client",
+    kicker: "WeShopAlot",
+    keywords: ["walkthrough", "demo", "Swagger", "screenshots", "checkout"],
+    body: WALKTHROUGH_LEDE,
+    href: "#/walkthrough",
+  });
+  for (const s of WALKTHROUGH_STEPS) {
+    docs.push({
+      id: `walkthrough-${s.id}`,
+      kind: "page",
+      title: s.title,
+      subtitle: s.summary,
+      kicker: `Walkthrough · ${s.layer}`,
+      keywords: s.calls.map((c) => `${c.method} ${c.route}`),
+      body: [s.summary, ...s.calls.map((c) => `${c.method} ${c.route}: ${c.when}.`), ...s.points, s.ask ?? ""]
+        .join(" ")
+        .replace(/`/g, ""),
+      href: `#/walkthrough?s=${s.id}`,
+    });
+  }
 
   // ------------------------------------------------------ tools & setup
   docs.push({

@@ -14,6 +14,10 @@ export default function ReferencePage() {
     <article className="page">
       <h1>Reference app: WeShopAlot</h1>
       <p className="lede">{REFERENCE_LEDE}</p>
+      <p>
+        <a className="contact-link" href="#/walkthrough">Service → UI walkthrough →</a> the API in Swagger, then
+        the Angular client from shop to order confirmation, screen by screen.
+      </p>
 
       {REFERENCE_SECTIONS.map((s) => (
         <section key={s.id} id={s.id}>

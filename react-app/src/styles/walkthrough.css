@@ -1,0 +1,72 @@
+
+/* Service → UI walkthrough */
+.http-stripe { background: #635bff; }
+.wt-toolbar { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; margin: 14px 0 10px; }
+.wt-mode { display: inline-flex; border: 1px solid var(--border); border-radius: 8px; overflow: hidden; }
+.wt-mode button {
+  font: inherit; font-size: 0.9rem; font-weight: 600; padding: 6px 16px;
+  background: var(--card); color: var(--ink); border: 0; cursor: pointer;
+}
+.wt-mode button + button { border-left: 1px solid var(--border); }
+.wt-mode button[aria-pressed="true"] { background: var(--brand); color: var(--brand-ink); }
+.wt-hint { font-size: 0.85rem; color: var(--text-muted); }
+
+.wt-flow { list-style: none; display: flex; flex-wrap: wrap; gap: 6px; padding: 0; margin: 0 0 8px; }
+.wt-chip {
+  display: inline-block; font: inherit; font-size: 0.84rem; font-weight: 600;
+  padding: 4px 12px; border-radius: 999px; border: 1px solid var(--border);
+  background: var(--chip); color: var(--ink); text-decoration: none; cursor: pointer;
+}
+.wt-chip.svc { background: var(--lab-bg); border-color: var(--lab); color: var(--lab); }
+.wt-chip:hover { border-color: var(--accent); }
+.wt-chip.on { background: var(--brand); border-color: var(--brand); color: var(--brand-ink); }
+
+.walkthrough section h2 { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; }
+.wt-num {
+  display: inline-block; min-width: 1.7em; padding: 0 6px; border-radius: 6px; text-align: center;
+  background: var(--brand); color: var(--brand-ink); font-size: 0.85em;
+}
+.wt-present-here {
+  margin-left: auto; font: inherit; font-size: 0.8rem; font-weight: 600; color: var(--accent-dark);
+  background: none; border: 1px solid var(--tint-border); border-radius: 999px; padding: 2px 12px; cursor: pointer;
+}
+.wt-present-here:hover { background: var(--tint); }
+
+.wt-step { display: grid; grid-template-columns: minmax(0, 1fr); gap: 16px; }
+.wt-shot { margin: 0; background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); box-shadow: var(--shadow); overflow: hidden; }
+/* --ar (width / height) is set inline so the box has its final size before the image loads,
+   which keeps ?s= deep links landing in the right place. Tall shots are capped by viewport height. */
+.wt-shot img { display: block; width: min(100%, calc(78vh * var(--ar, 1.8))); height: auto; aspect-ratio: var(--ar); margin: 0 auto; }
+.wt-shot figcaption { padding: 8px 14px 10px; font-size: 0.9rem; color: var(--text-muted); border-top: 1px solid var(--border); }
+.wt-url { display: flex; align-items: center; gap: 8px; padding: 6px 12px; background: var(--soft); border-bottom: 1px solid var(--border); min-width: 0; }
+.wt-url code { font-size: 0.82rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.wt-layer { flex: none; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; padding: 1px 8px; border-radius: 4px; color: #fff; }
+.wt-layer-service { background: var(--lab); }
+.wt-layer-ui { background: var(--accent-dark); }
+
+.wt-notes h3 { font-size: 0.95rem; margin: 4px 0 6px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-muted); }
+.wt-calls { list-style: none; padding: 0; margin: 0 0 14px; }
+.wt-calls li { padding: 5px 0; border-bottom: 1px dashed var(--border); line-height: 1.5; }
+.wt-calls code { font-size: 0.86em; word-break: break-all; }
+.wt-when { display: block; font-size: 0.84rem; color: var(--text-muted); margin-left: calc(3.6em + 16px); }
+.wt-points li { margin-bottom: 6px; }
+.wt-ask { background: var(--cp-bg); border-left: 4px solid var(--cp); padding: 8px 12px; border-radius: 0 8px 8px 0; }
+.wt-mods { font-size: 0.88rem; color: var(--text-muted); }
+.wt-mods a { color: var(--accent-dark); font-weight: 600; text-decoration: none; }
+.wt-foot { margin-top: 30px; font-size: 0.88rem; color: var(--text-muted); }
+.wt-foot a { color: var(--accent-dark); }
+
+.wt-nav {
+  font: inherit; font-weight: 600; padding: 8px 16px; border-radius: 8px; cursor: pointer;
+  border: 1px solid var(--border); background: var(--card); color: var(--accent-dark);
+}
+.wt-nav:disabled { opacity: 0.4; cursor: default; }
+.wt-nav:not(:disabled):hover { border-color: var(--accent); }
+
+/* Present mode: wider stage, no sidebar, big screenshot, notes in two columns under it */
+.body:has(.wt-presenting) .sidebar { display: none; }
+.content:has(.wt-presenting) { max-width: 92rem; margin: 0 auto; }
+.wt-big .wt-shot img { width: min(100%, calc(66vh * var(--ar, 1.8))); }
+@media (min-width: 1100px) {
+  .wt-big .wt-notes { display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 3fr); gap: 32px; align-items: start; }
+}

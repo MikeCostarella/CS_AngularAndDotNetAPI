@@ -6,6 +6,7 @@ import NotesPage from "./components/NotesPage";
 import ProjectsPage from "./components/ProjectsPage";
 import ToolsPage from "./components/ToolsPage";
 import ReferencePage from "./components/ReferencePage";
+import WalkthroughPage from "./components/WalkthroughPage";
 import ResourcesPage from "./components/ResourcesPage";
 import GlossaryPage from "./components/GlossaryPage";
 import SearchPage from "./components/SearchPage";
@@ -26,6 +27,7 @@ type Route =
   | { page: "syllabus" }
   | { page: "projects" }
   | { page: "reference" }
+  | { page: "walkthrough" }
   | { page: "tools" }
   | { page: "resources" }
   | { page: "glossary" }
@@ -54,6 +56,7 @@ function parseHash(nonce: number): Location {
     if (path === "#/syllabus") return { page: "syllabus" };
     if (path === "#/projects") return { page: "projects" };
     if (path === "#/reference") return { page: "reference" };
+    if (path === "#/walkthrough") return { page: "walkthrough" };
     if (path === "#/tools") return { page: "tools" };
     if (path === "#/resources") return { page: "resources" };
     if (path === "#/glossary") return { page: "glossary" };
@@ -79,6 +82,7 @@ const TOP_LINKS: { href: string; label: string; page: Route["page"] }[] = [
   { href: "#/", label: "Home", page: "home" },
   { href: "#/syllabus", label: "Syllabus", page: "syllabus" },
   { href: "#/reference", label: "WeShopAlot", page: "reference" },
+  { href: "#/walkthrough", label: "Walkthrough", page: "walkthrough" },
   { href: "#/projects", label: "Projects", page: "projects" },
   { href: "#/tools", label: "Tools & Setup", page: "tools" },
   { href: "#/resources", label: "Resources", page: "resources" },
@@ -146,6 +150,7 @@ export default function App() {
           {route.page === "syllabus" && <SyllabusPage />}
           {route.page === "projects" && <ProjectsPage />}
           {route.page === "reference" && <ReferencePage />}
+          {route.page === "walkthrough" && <WalkthroughPage />}
           {route.page === "tools" && <ToolsPage />}
           {route.page === "resources" && <ResourcesPage />}
           {route.page === "glossary" && <GlossaryPage />}
