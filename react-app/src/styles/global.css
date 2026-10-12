@@ -641,6 +641,7 @@ h2 { font-size: 1.18rem; margin: 0 0 10px; }
 }
 .cf-save:hover { background: var(--accent); }
 .cf-error { margin: 0.4rem 0 0; color: #b42318; font-size: 0.86rem; }
+.course-folder .step-cmd-wrap { margin-top: 0.35rem; }
 .course-folder kbd {
   font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 0.78rem;
   border: 1px solid var(--border); border-bottom-width: 2px; border-radius: 4px; padding: 0 0.3rem; background: var(--soft);

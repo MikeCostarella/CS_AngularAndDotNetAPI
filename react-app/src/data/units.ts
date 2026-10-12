@@ -48,8 +48,8 @@ export const UNIT_DEFS: UnitDef[] = [
                 {
                   do: "Make one course folder for every lab in this course, and start in it.",
                   where: "PowerShell",
-                  commands: "mkdir $HOME\\ng-dotnet -Force\ncd $HOME\\ng-dotnet\n(Get-Location).Path",
-                  expect: "The prompt now ends in \\ng-dotnet, and the last line printed is the folder's full path, such as C:\\Users\\Mike\\ng-dotnet. Paste that line into the \"Your course folder\" box at the top of this lab, and the VS Code labels in every lab become links that open the right folder.",
+                  commands: "mkdir $HOME\\ng-dotnet -Force\ncd $HOME\\ng-dotnet\n$p = (Get-Location).Path\nSet-Clipboard $p\n$p",
+                  expect: "The prompt now ends in \\ng-dotnet, and the last line printed is the folder's full path, such as C:\\Users\\Mike\\ng-dotnet. The same path is now on your clipboard: click Paste from clipboard in the \"Your course folder\" box at the top of this lab, and the VS Code labels in every lab become links that open the right folder.",
                   point: "Lab 1 lives in its own lab01 folder. From Lab 2 on, every lab grows the same app, ShelfShare, in a sibling folder, so every lab starts with cd $HOME\\ng-dotnet.",
                 },
                 {

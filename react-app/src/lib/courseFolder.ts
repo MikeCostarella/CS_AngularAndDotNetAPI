@@ -7,6 +7,9 @@
 
 import { useEffect, useState } from "react";
 
+/** The course folder's name under the home folder, e.g. $HOME\\ng-dotnet. */
+export const COURSE_FOLDER_NAME = "ng-dotnet";
+
 const KEY = "ng-dotnet.courseFolder";
 const EVENT = "ng-dotnet:course-folder";
 
