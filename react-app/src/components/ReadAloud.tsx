@@ -1,17 +1,12 @@
 import { useCallback, useEffect, useRef, useState } from "react";
-import {
-  READ_EVENT,
-  collectBlocks,
-  loadPrefs,
-  rankVoices,
-  savePrefs,
-  startReadAloud,
-  ttsSupported,
-  voiceLabel,
-} from "../lib/pageReader";
-import type { ReadBlock, ReadPrefs, ReadStartDetail } from "../lib/pageReader";
+import { READ_EVENT, collectBlocks, startReadAloud, ttsSupported } from "../lib/pageReader";
+import type { ReadBlock, ReadStartDetail } from "../lib/pageReader";
+import { chooseVoice, loadPrefs, makeUtterance, savePrefs, useVoices } from "../lib/voices";
+import type { ReadPrefs } from "../lib/voices";
+import ReadAloudSettings from "./ReadAloudSettings";
 
-// Integrated read-aloud player. A "Listen" button floats in the corner; it
+// Integrated read-aloud player (shared across the course sites — see the file
+// list at the top of lib/pageReader.ts). A "Listen" button floats in the corner; it
 // opens a player bar that reads the page's main content paragraph by
 // paragraph, highlighting and scrolling to the one being read. While the
 // player is open, clicking a paragraph reads from there.
@@ -41,7 +36,6 @@ export default function ReadAloud({ hidden = false }: { hidden?: boolean }) {
   const [index, setIndex] = useState(0);
   const [total, setTotal] = useState(0);
   const [prefs, setPrefs] = useState<ReadPrefs>(loadPrefs);
-  const [voices, setVoices] = useState<SpeechSynthesisVoice[]>([]);
   const [showSettings, setShowSettings] = useState(false);
 
   const blocksRef = useRef<ReadBlock[] | null>(null);
@@ -49,7 +43,6 @@ export default function ReadAloud({ hidden = false }: { hidden?: boolean }) {
   const genRef = useRef(0);
   const statusRef = useRef<Status>("idle");
   const prefsRef = useRef(prefs);
-  const voicesRef = useRef<SpeechSynthesisVoice[]>([]);
   const uttRef = useRef<SpeechSynthesisUtterance | null>(null); // keeps Chrome from GC-ing it mid-speech
   const timerRef = useRef<number | undefined>(undefined);
   const currentElRef = useRef<HTMLElement | null>(null);
@@ -63,22 +56,10 @@ export default function ReadAloud({ hidden = false }: { hidden?: boolean }) {
   };
 
   // ---- voices ------------------------------------------------------------
-  useEffect(() => {
-    if (!ttsSupported) return;
-    const load = () => {
-      const ranked = rankVoices(window.speechSynthesis.getVoices());
-      voicesRef.current = ranked;
-      setVoices(ranked);
-    };
-    load();
-    window.speechSynthesis.addEventListener("voiceschanged", load);
-    return () => window.speechSynthesis.removeEventListener("voiceschanged", load);
-  }, []);
-
-  const pickVoice = (): SpeechSynthesisVoice | null => {
-    const list = voicesRef.current;
-    return list.find((v) => v.voiceURI === prefsRef.current.voiceURI) ?? list[0] ?? null;
-  };
+  const voices = useVoices(prefs.allLangs);
+  const voicesRef = useRef(voices);
+  voicesRef.current = voices;
+  const pickVoice = () => chooseVoice(voicesRef.current, prefsRef.current.voiceURI);
 
   // ---- highlighting ------------------------------------------------------
   const clearHighlight = () => {
@@ -155,13 +136,7 @@ export default function ReadAloud({ hidden = false }: { hidden?: boolean }) {
     // A short gap after cancel(): Chrome can drop a speak() issued in the same tick.
     timerRef.current = window.setTimeout(() => {
       if (gen !== genRef.current) return;
-      const u = new SpeechSynthesisUtterance(block.chunks[c] ?? "");
-      const voice = pickVoice();
-      if (voice) {
-        u.voice = voice;
-        u.lang = voice.lang;
-      }
-      u.rate = prefsRef.current.rate;
+      const u = makeUtterance(block.chunks[c] ?? "", pickVoice(), prefsRef.current);
       const advance = () => {
         if (gen !== genRef.current) return;
         if (c + 1 < block.chunks.length) speakFrom(b, c + 1);
@@ -245,6 +220,19 @@ export default function ReadAloud({ hidden = false }: { hidden?: boolean }) {
       highlight(list[b].el);
       if (statusRef.current === "idle") setStat("paused");
     }
+  };
+
+  // Speaks a sample sentence with the current settings. Pauses reading first.
+  const preview = (text: string) => {
+    if (statusRef.current === "playing") pause();
+    genRef.current++;
+    window.clearTimeout(timerRef.current);
+    window.speechSynthesis.cancel();
+    timerRef.current = window.setTimeout(() => {
+      const u = makeUtterance(text, pickVoice(), prefsRef.current);
+      uttRef.current = u;
+      window.speechSynthesis.speak(u);
+    }, 50);
   };
 
   const updatePrefs = (p: Partial<ReadPrefs>) => {
@@ -418,25 +406,13 @@ export default function ReadAloud({ hidden = false }: { hidden?: boolean }) {
         </button>
       </div>
       {showSettings && (
-        <div className="ra-settings">
-          <label>
-            Voice
-            <select
-              value={currentVoice?.voiceURI ?? ""}
-              onChange={(e) => updatePrefs({ voiceURI: e.target.value })}
-            >
-              {voices.map((v) => (
-                <option key={v.voiceURI} value={v.voiceURI}>
-                  {voiceLabel(v)}
-                </option>
-              ))}
-            </select>
-          </label>
-          <p className="ra-hint">
-            Click any paragraph to read from there. Voices come from your browser and operating system — Edge's
-            "Natural" voices sound the most human.
-          </p>
-        </div>
+        <ReadAloudSettings
+          voices={voices}
+          currentVoice={currentVoice}
+          prefs={prefs}
+          onChange={updatePrefs}
+          onPreview={preview}
+        />
       )}
     </div>
   );

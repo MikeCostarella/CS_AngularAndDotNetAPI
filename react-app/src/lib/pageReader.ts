@@ -1,6 +1,13 @@
-// Read-aloud engine (shared across the course sites — keep the copies identical): turns the page's main content into an ordered list of
-// readable blocks, then speaks them with the browser's built-in voices
+// Read-aloud engine: turns the page's main content into an ordered list of
+// readable blocks, which the player speaks with the browser's built-in voices
 // (Web Speech API — free, no keys, works offline with local voices).
+//
+// Shared across the course sites — keep these files identical in every repo:
+//   src/lib/pageReader.ts            page → readable blocks, start events
+//   src/lib/voices.ts                voices, listener preferences, utterances
+//   src/components/ReadAloud.tsx     the player bar and the "Listen" button
+//   src/components/ReadAloudSettings.tsx  the voice settings panel
+//   src/styles/readaloud.css         styles for all of the above
 //
 // Design notes
 // - Blocks are found by walking the DOM and using computed display, so new
@@ -172,65 +179,8 @@ export function collectBlocks(root: HTMLElement): ReadBlock[] {
   return blocks;
 }
 
-// ---------------------------------------------------------------------------
-// Preferences (per viewer, best effort)
-
-const PREF_KEY = "readAloud.prefs.v1";
-
-export interface ReadPrefs {
-  rate: number;
-  voiceURI: string | null;
-}
-
-export function loadPrefs(): ReadPrefs {
-  try {
-    const raw = window.localStorage.getItem(PREF_KEY);
-    if (raw) {
-      const p = JSON.parse(raw) as Partial<ReadPrefs>;
-      return { rate: typeof p.rate === "number" ? p.rate : 1, voiceURI: p.voiceURI ?? null };
-    }
-  } catch {
-    /* storage unavailable */
-  }
-  return { rate: 1, voiceURI: null };
-}
-
-export function savePrefs(p: ReadPrefs): void {
-  try {
-    window.localStorage.setItem(PREF_KEY, JSON.stringify(p));
-  } catch {
-    /* storage unavailable */
-  }
-}
-
+/** True when the browser can speak (Web Speech API). */
 export const ttsSupported = typeof window !== "undefined" && "speechSynthesis" in window && "SpeechSynthesisUtterance" in window;
-
-/** English voices first, best-sounding first (Edge "Natural", then Google, then the rest). */
-export function rankVoices(all: SpeechSynthesisVoice[]): SpeechSynthesisVoice[] {
-  const lang = (navigator.language || "en-US").toLowerCase();
-  const score = (v: SpeechSynthesisVoice) => {
-    let s = 0;
-    const vl = v.lang.toLowerCase().replace("_", "-");
-    if (vl === lang) s += 40;
-    else if (vl.startsWith("en")) s += 30;
-    if (/natural|neural|online/i.test(v.name)) s += 12;
-    if (/^google/i.test(v.name)) s += 8;
-    if (v.default) s += 2;
-    return s;
-  };
-  const en = all.filter((v) => v.lang.toLowerCase().startsWith("en"));
-  const list = en.length ? en : all;
-  return [...list].sort((a, b) => score(b) - score(a) || a.name.localeCompare(b.name));
-}
-
-/** A shorter label for the voice picker. */
-export function voiceLabel(v: SpeechSynthesisVoice): string {
-  const name = v.name
-    .replace(/^Microsoft\s+/i, "")
-    .replace(/\s+Online\s+\(Natural\)/i, " (Natural)")
-    .replace(/\s*-\s*English.*$/i, "");
-  return `${name} · ${v.lang}`;
-}
 
 // ---------------------------------------------------------------------------
 // Events other components use to drive the player.

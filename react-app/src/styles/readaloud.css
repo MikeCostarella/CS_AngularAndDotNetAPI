@@ -1,4 +1,5 @@
-/* Read aloud — shared across the course sites (keep the copies identical).
+/* Read aloud — shared across the course sites (keep the copies identical;
+   see the file list at the top of src/lib/pageReader.ts).
    Colors come from each site's tokens, with fallbacks for sites whose
    tokens use other names. */
 :root {
@@ -61,8 +62,21 @@
 }
 .ra-rate option, .ra-settings option { color: var(--ra-menu-ink); background: var(--ra-menu-bg); }
 .ra-settings { border-top: 1px solid rgba(255, 255, 255, 0.15); margin-top: 8px; padding: 8px 4px 2px; }
-.ra-settings label { display: flex; align-items: center; gap: 8px; font-size: 0.85rem; }
-.ra-settings select { flex: 1; min-width: 0; }
+.ra-field { display: flex; align-items: center; gap: 8px; font-size: 0.85rem; margin-bottom: 8px; }
+.ra-field label { width: 3.2em; flex: none; }
+.ra-settings select, .ra-field input[type="range"] { flex: 1; min-width: 0; }
+.ra-field input[type="range"] { accent-color: var(--ra-accent); }
+.ra-settings optgroup { color: var(--ra-menu-ink); background: var(--ra-menu-bg); font-style: normal; }
+.ra-preview {
+  flex: none; font: inherit; font-size: 0.78rem; padding: 4px 10px; cursor: pointer;
+  color: var(--ra-bar-ink); background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.25); border-radius: 999px;
+}
+.ra-preview:hover:not(:disabled) { background: rgba(255, 255, 255, 0.2); }
+.ra-preview:disabled { opacity: 0.45; cursor: default; }
+.ra-preview:focus-visible, .ra-check input:focus-visible { outline: 2px solid var(--ra-accent); outline-offset: 2px; }
+.ra-check { display: flex; align-items: center; gap: 8px; font-size: 0.82rem; cursor: pointer; }
+.ra-check input { accent-color: var(--ra-accent); }
 .ra-hint { margin: 8px 0 0; font-size: 0.78rem; opacity: 0.75; line-height: 1.4; }
 
 /* The paragraph being read, and the paragraphs you can click to jump to. */
