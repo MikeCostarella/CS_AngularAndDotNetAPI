@@ -49,14 +49,14 @@ export const REFERENCE_SECTIONS: PageSection[] = [
     heading: "What is in the solution",
     items: [
       "`WeShopAlot.WebAPI`: controllers, middleware, error types, the [Cached] attribute, Swagger, and Program.cs",
-      "`WeShopAlot.Data`: the EF Core context, entities, migrations, repositories, and the specification classes behind every query",
+      "`WeShopAlot.Data`: the EF Core context, entities, migrations, repositories, and the specification classes behind every query; `Seed/` holds the sample catalog as embedded JSON and `DatabaseSeeder`, which rebuilds and seeds a database (Module 4)",
       "`WeShopAlot.Infrastructure.Services`: orders, payments (Stripe), JWT tokens, the Redis response cache, and the unit of work",
       "`WeShopAlot.Shared`: DTOs shared by the API and its .NET clients, and a typed API client",
-      "`WeShopAlot.Data.ConsoleApp`: loads the JSON seed files (products, brands, types, delivery methods)",
+      "`WeShopAlot.Data.ConsoleApp`: the one command that builds (or wipes and rebuilds) the database by calling `DatabaseSeeder`, and the startup project for `dotnet ef`; see [[weshopalot-database]]",
       "`Client`: the Angular client (written for Angular 15) with shop, basket, checkout, account, and orders features",
       "`WeShopAlot.UI.ClientWPF`: a desktop client with the same features as the Angular app, the clearest proof that the API is the product",
       "`DesignSystem`: one tokens.json file of brand colors, fonts, sizes, and spacing, and a small Node script that generates the Angular Sass variables and the WPF resource dictionary from it, so both clients share one look",
-      "`WeShopAlot.Testing.*`: repository, service, and Web API test projects with shared base classes",
+      "`WeShopAlot.Testing.*`: three tiers (Module 12): `Testing.Unit` for pure functions and the seed JSON, and `Testing.WebApis` for the whole API through WebApplicationFactory, once on an in-memory database and once on a SQL Server database rebuilt per run by the same seeder. Three older empty projects are slated for removal",
       "`Deployment`: ARM templates for App Service, Function App, Key Vault, and Storage; `docker-compose.yml` runs Redis",
       "`Confluence`: architecture and data-model diagrams, and step-by-step screenshots of creating each Azure resource",
     ],
@@ -92,7 +92,7 @@ export const REFERENCE_SECTIONS: PageSection[] = [
     heading: "Versions and the upgrade",
     paras: [
       "WeShopAlot was written on .NET 8 with an Angular 15 client. In October 2026 it was upgraded to .NET 10 (the current LTS) and Angular 22: Angular one major version at a time with its migrations, the client moved to the esbuild application builder and Vitest, and every NuGet and npm package moved to its current release. Module 13 uses that upgrade as its worked example. See [[angular-update]] and [[dotnet-download]].",
-      "The upgrade added tests first and let them find the bugs: 15 API integration tests (WebApplicationFactory, an in-memory database, and in-memory stand-ins for Redis) and 10 Angular unit tests (HttpTestingController). Those tests turned up real defects that had been hiding in the 2024 code, listed below.",
+      "The upgrade added tests first and let them find the bugs: 15 API integration tests (WebApplicationFactory, an in-memory database, and in-memory stand-ins for Redis) and 10 Angular unit tests (HttpTestingController). Those tests turned up real defects that had been hiding in the 2024 code, listed below. A unit project of pure functions followed, and then a SQL Server tier that rebuilds a real database for every run with the same seeder developers use, because two of the bugs below were ones an in-memory database cannot see. Module 12 reads all three; [[weshopalot-database]] documents the database side.",
     ],
   },
   {

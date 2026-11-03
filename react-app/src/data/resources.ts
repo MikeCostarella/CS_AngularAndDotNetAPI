@@ -16,6 +16,7 @@ export interface Resource extends Link {
 export const RESOURCES: Resource[] = [
   // Reference app
   { id: "weshopalot-repo", group: "Reference app", label: "WeShopAlot source (GitHub: MikeCostarella/WeShopAlot)", url: "https://github.com/MikeCostarella/WeShopAlot", note: "The course's reference system: ASP.NET Core Web API, EF Core, Redis, JWT, Stripe, and an Angular client. See the WeShopAlot page for a guided map." },
+  { id: "weshopalot-database", group: "Reference app", label: "WeShopAlot docs/Database.md: how the database is built, rebuilt, and used in tests", url: "https://github.com/MikeCostarella/WeShopAlot/blob/master/docs/Database.md", note: "Migrations, the two kinds of seed data, the seeder command (and what it wipes), adding a migration, and the SQL Server test tier built on the same rebuild. Modules 4 and 12." },
 
   // HTTP and REST
   { id: "mdn-http", group: "HTTP and REST", label: "An overview of HTTP (MDN)", url: "https://developer.mozilla.org/en-US/docs/Web/HTTP/Overview", note: "Clients and servers, requests and responses, and what a message is made of." },
@@ -49,7 +50,8 @@ export const RESOURCES: Resource[] = [
   { id: "efcore-migrations", group: "ASP.NET Core and EF Core", label: "EF Core migrations overview", url: "https://learn.microsoft.com/en-us/ef/core/managing-schemas/migrations/", note: "Creating, applying, and reviewing schema changes as code." },
   { id: "efcore-querying", group: "ASP.NET Core and EF Core", label: "Querying data with EF Core", url: "https://learn.microsoft.com/en-us/ef/core/querying/", note: "LINQ to SQL translation, loading related data, and tracking." },
   { id: "efcore-pagination", group: "ASP.NET Core and EF Core", label: "Pagination in EF Core", url: "https://learn.microsoft.com/en-us/ef/core/querying/pagination", note: "Offset paging vs. keyset (cursor) paging, and why large offsets get slow." },
-  { id: "xunit", group: "ASP.NET Core and EF Core", label: "xUnit.net", url: "https://xunit.net/", note: "The test framework used for ShelfShare's and WeShopAlot's .NET tests." },
+  { id: "xunit", group: "ASP.NET Core and EF Core", label: "xUnit.net", url: "https://xunit.net/", note: "The test framework ShelfShare's labs use. WeShopAlot's tests use MSTest; the ideas transfer one-to-one." },
+  { id: "mstest", group: "ASP.NET Core and EF Core", label: "MSTest documentation", url: "https://learn.microsoft.com/en-us/dotnet/core/testing/unit-testing-mstest-intro", note: "The framework WeShopAlot's three .NET test tiers use: [TestClass], [ClassInitialize], [TestCategory], Assert.Inconclusive." },
 
   // Angular
   { id: "angular-docs", group: "Angular", label: "Angular documentation (angular.dev)", url: "https://angular.dev/", note: "The official guides and API reference for current Angular." },

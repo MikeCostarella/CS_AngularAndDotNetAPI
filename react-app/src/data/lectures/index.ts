@@ -10,10 +10,14 @@ import { MODULE_BY_ID, MODULES } from "../modules";
 import type { LectureNotesDef, ModuleDef, NoteBlock } from "../types";
 import { M01_NOTES } from "./m01";
 import { M02_NOTES } from "./m02";
+import { M04_NOTES } from "./m04";
+import { M12_NOTES } from "./m12";
 
 const ALL_NOTES: LectureNotesDef[] = [
   M01_NOTES,
   M02_NOTES,
+  M04_NOTES,
+  M12_NOTES,
 ];
 
 export const NOTES_BY_MODULE: Record<string, LectureNotesDef> = Object.fromEntries(

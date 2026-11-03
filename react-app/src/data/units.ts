@@ -324,13 +324,13 @@ export const UNIT_DEFS: UnitDef[] = [
           { id: "repositories", text: "Repositories and unit of work: when the pattern helps, and when EF Core already provides it" },
           { id: "async-queries", text: "Async queries, change tracking vs. no-tracking, and the N+1 problem" },
         ],
-        resources: ["efcore", "efcore-migrations", "efcore-querying", "weshopalot-repo"],
+        resources: ["efcore", "efcore-migrations", "efcore-querying", "weshopalot-repo", "weshopalot-database"],
         lab: {
           title: "Lab 4 — ShelfShare gets a database",
           tasks: [
             "Add EF Core with the SQLite provider and the design-time tools, and create a ShelfShareContext with Book, Author, and Genre entities (a book has one author and one genre; an author has many books).",
             "Create and apply an initial migration with dotnet ef migrations add and dotnet ef database update, and commit the Migrations folder.",
-            "Seed at least 40 books, 15 authors, and 6 genres from JSON files on startup, the way WeShopAlot seeds products.json.",
+            "Seed at least 40 books, 15 authors, and 6 genres from JSON files, the way WeShopAlot seeds products.json: a seeder class in the data project with the JSON as embedded resources, called from startup, so Lab 12's tests can call it too.",
             "Replace the in-memory repository with an EF Core implementation without changing the controller.",
             "Add a second migration that adds an ISBN column with a unique index, and record what SQL it generated.",
             "Turn on EF Core's SQL logging, request GET /api/books, and find and fix one N+1 query by using Include or a projection.",
@@ -627,12 +627,13 @@ export const UNIT_DEFS: UnitDef[] = [
           { id: "contract-tests", text: "Keeping client and API in sync: the OpenAPI document as a contract" },
           { id: "ci", text: "Continuous integration: build and test both halves in GitHub Actions" },
         ],
-        resources: ["xunit", "aspnet-integration-tests", "angular-testing", "angular-http-testing", "playwright", "github-actions-dotnet"],
+        resources: ["xunit", "mstest", "aspnet-integration-tests", "weshopalot-database", "angular-testing", "angular-http-testing", "playwright", "github-actions-dotnet"],
         lab: {
           title: "Lab 12 — Prove it",
           tasks: [
+            "Run WeShopAlot's three .NET tiers (dotnet test in Solution; the SQL Server tier needs LocalDB) and read WeShopAlotSqlApiFactory next to WeShopAlotApiFactory. Add one test to SqlApiTests that asks a question only the database can answer, and say in a comment why the in-memory tier could not have asked it.",
             "Add an xUnit test project with unit tests for book validation and the sort allow-list.",
-            "Add integration tests with WebApplicationFactory that cover the status bench from Lab 6 (200, 201, 204, 400, 401, 404, 409) against a test SQLite database.",
+            "Add integration tests with WebApplicationFactory that cover the status bench from Lab 6 (200, 201, 204, 400, 401, 404, 409) against a SQLite database your factory creates per run, migrates, and seeds with the Lab 4 seeder, then deletes.",
             "Add Angular tests for the catalog component and BookService, using HttpTestingController to check the exact query string sent.",
             "Add two Playwright end-to-end tests: browse and filter the catalog, and sign in and add a book to the borrow list.",
             "Add a GitHub Actions workflow that builds and tests the API and the client on every push and pull request.",
