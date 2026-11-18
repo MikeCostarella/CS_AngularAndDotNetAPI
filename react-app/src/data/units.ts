@@ -616,7 +616,7 @@ export const UNIT_DEFS: UnitDef[] = [
         subtitle: "Unit, integration, component, and end-to-end tests, and running them in CI",
         overview: [
           "A full-stack app can break in three places: inside the API, inside the client, and in the contract between them. This module tests all three. API integration tests start the whole application in memory with WebApplicationFactory and send it real HTTP requests; Angular tests check components and services with the HTTP layer mocked; and a few end-to-end tests drive a real browser through the main flows.",
-          "WeShopAlot is the worked example: its Testing.WebApis project runs the whole API in memory with WebApplicationFactory, an in-memory database, and in-memory stand-ins for Redis, and its 15 tests found real bugs during the 2026 upgrade (see the WeShopAlot page). Students extend that suite before writing ShelfShare's. The module ends with every test running in GitHub Actions on every push, so a broken build is caught before anyone merges it.",
+          "WeShopAlot is the worked example: its Testing.WebApis project runs the whole API in memory with WebApplicationFactory, an in-memory database, and in-memory stand-ins for Redis, and its 15 tests found real bugs during the 2026 upgrade (see the WeShopAlot page); its Testing.Services project uses the same in-memory provider one level down, testing OrderService with its real repositories and no HTTP. Students extend those suites before writing ShelfShare's. The module ends with every test running in GitHub Actions on every push, so a broken build is caught before anyone merges it.",
         ],
         topics: [
           { id: "test-pyramid", text: "What to test where: the test pyramid for a full-stack app" },
@@ -631,7 +631,7 @@ export const UNIT_DEFS: UnitDef[] = [
         lab: {
           title: "Lab 12 — Prove it",
           tasks: [
-            "Run WeShopAlot's three .NET tiers (dotnet test in Solution; the SQL Server tier needs LocalDB) and read WeShopAlotSqlApiFactory next to WeShopAlotApiFactory. Add one test to SqlApiTests that asks a question only the database can answer, and say in a comment why the in-memory tier could not have asked it.",
+            "Run WeShopAlot's four .NET tiers (dotnet test in Solution; the SQL Server tier needs LocalDB) and read ServiceTestDatabase, WeShopAlotApiFactory and WeShopAlotSqlApiFactory side by side: the same in-memory provider set up with and without HTTP, then the real database. Add one test to OrderServiceTests that pins a service rule, and one to SqlApiTests that asks a question only the database can answer; say in a comment why the in-memory tiers could not have asked the second.",
             "Add an xUnit test project with unit tests for book validation and the sort allow-list.",
             "Add integration tests with WebApplicationFactory that cover the status bench from Lab 6 (200, 201, 204, 400, 401, 404, 409) against a SQLite database your factory creates per run, migrates, and seeds with the Lab 4 seeder, then deletes.",
             "Add Angular tests for the catalog component and BookService, using HttpTestingController to check the exact query string sent.",

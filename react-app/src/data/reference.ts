@@ -56,7 +56,7 @@ export const REFERENCE_SECTIONS: PageSection[] = [
       "`Client`: the Angular client (written for Angular 15) with shop, basket, checkout, account, and orders features",
       "`WeShopAlot.UI.ClientWPF`: a desktop client with the same features as the Angular app, the clearest proof that the API is the product",
       "`DesignSystem`: one tokens.json file of brand colors, fonts, sizes, and spacing, and a small Node script that generates the Angular Sass variables and the WPF resource dictionary from it, so both clients share one look",
-      "`WeShopAlot.Testing.*`: three tiers (Module 12): `Testing.Unit` for pure functions and the seed JSON, and `Testing.WebApis` for the whole API through WebApplicationFactory, once on an in-memory database and once on a SQL Server database rebuilt per run by the same seeder. Three older empty projects are slated for removal",
+      "`WeShopAlot.Testing.*`: four tiers (Module 12): `Testing.Unit` for pure functions and the seed JSON, `Testing.Services` for a service with its real repositories on an in-memory database and no HTTP, and `Testing.WebApis` for the whole API through WebApplicationFactory, once on an in-memory database and once on a SQL Server database rebuilt per run by the same seeder. Two older empty projects are slated for removal",
       "`Deployment`: ARM templates for App Service, Function App, Key Vault, and Storage; `docker-compose.yml` runs Redis",
       "`Confluence`: architecture and data-model diagrams, and step-by-step screenshots of creating each Azure resource",
     ],
